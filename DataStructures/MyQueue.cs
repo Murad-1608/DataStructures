@@ -1,6 +1,9 @@
-﻿namespace DataStructures
+﻿using System.Collections;
+using System.Runtime.CompilerServices;
+
+namespace DataStructures
 {
-    public class MyQueue<T>
+    public class MyQueue<T> : IEnumerable
     {
         private const int DEFAULT_SIZE = 50;
 
@@ -15,6 +18,10 @@
 
         public void Enqueue(T item)
         {
+            if (count == elements.Length)
+            {
+                Extend();
+            }
             tail++;
             elements[tail] = item;
             count++;
@@ -29,6 +36,11 @@
             head++;
             count--;
 
+            if (count > 0 && count == elements.Length / 4)
+            {
+                Shrink();
+            }
+
             return item;
         }
 
@@ -40,5 +52,28 @@
 
         public bool IsEmpty() => count == 0;
 
+        private void Extend()
+        {
+            Array.Resize(ref elements, elements.Length * 2);
+            head = 0;
+            tail = count - 1;
+        }
+        private void Shrink()
+        {
+            int capacity = elements.Length / 2;
+            var newArray = new T[capacity];
+
+            Array.Copy(elements, head, newArray, 0, count);
+            elements = newArray;
+
+            head = 0;
+            tail = count - 1;
+
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return elements.GetEnumerator();
+        }
     }
 }
