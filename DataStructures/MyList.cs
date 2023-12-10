@@ -1,6 +1,9 @@
-﻿namespace DataStructures
+﻿using System.Collections;
+using System.Security.Cryptography.X509Certificates;
+
+namespace DataStructures
 {
-    public class MyList<T>
+    public class MyList<T> : IEnumerable
     {
         private T[] items;
         private int count;
@@ -8,6 +11,11 @@
         public MyList()
         {
             items = new T[1];
+            count = 0;
+        }
+        public MyList(int capacity)
+        {
+            items = new T[capacity];
             count = 0;
         }
         #region Properties
@@ -23,6 +31,18 @@
             get
             {
                 return items.Length;
+            }
+        }
+
+        public T this[int index]
+        {
+            get
+            {
+                return items[index];
+            }
+            set
+            {
+                items[index] = value;
             }
         }
         #endregion
@@ -76,6 +96,14 @@
                 newItems[i] = items[i];
             }
             items = newItems;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return items[i];
+            }
         }
         #endregion
     }
