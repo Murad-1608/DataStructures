@@ -49,6 +49,8 @@
                 items[i] = items[i + 1];
             }
 
+            count--;
+
             if (items.Length / 4 == count)
             {
                 Resize(items.Length / 2);
@@ -69,11 +71,10 @@
         {
             T[] newItems = new T[newSize];
 
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < items.Length && i < newSize; i++)
             {
                 newItems[i] = items[i];
             }
-
             items = newItems;
         }
         #endregion
