@@ -11,12 +11,10 @@ namespace DataStructures
         public MyList()
         {
             items = new T[1];
-            count = 0;
         }
         public MyList(int capacity)
         {
             items = new T[capacity];
-            count = 0;
         }
         #region Properties
         public int Count
