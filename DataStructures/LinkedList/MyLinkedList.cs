@@ -1,10 +1,14 @@
-﻿namespace DataStructures.LinkedList
+﻿using System.Collections;
+
+namespace DataStructures.LinkedList
 {
-    public class MyLinkedList<T>
+    public class MyLinkedList<T>  /*IEnumerable*/
     {
         private Node<T> root;
         private Node<T> last;
+        public int age { get; set; }
 
+        public int age1;
         public T Root
         {
             get
@@ -35,10 +39,21 @@
             //    iterator = iterator.Next!;
 
             //iterator.Next = newItem;
+            Node<T> previous = last;
 
             last.Next = newItem;
             last = newItem;
+            last.Previous = previous;
         }
+
+        //public IEnumerator GetEnumerator()
+        //{            
+        //    while ()
+        //    {
+
+        //    }
+        //    yield return 
+        //}
 
         public void Remove(T item)
         {
@@ -65,6 +80,22 @@
             iterator.Next = iterator.Next.Next;
 
         }
+
+        public void AddFirst(T item)
+        {
+            var next = root.Next;
+            root = new Node<T>(item);
+            root.Next = next;
+        }
+        public void RemoveFirst()
+        {
+            root = root.Next;
+        }
+        public void RemoveLast()
+        {
+            last = last.Previous;
+        }
+
 
     }
 }

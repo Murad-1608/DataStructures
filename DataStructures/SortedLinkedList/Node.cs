@@ -1,4 +1,4 @@
-﻿namespace DataStructures.LinkedList
+﻿namespace DataStructures.SortedLinkedList
 {
     public class Node<T>
     {
@@ -7,7 +7,6 @@
             Value = value;
         }
         public T Value { get; set; }
-        public Node<T> Previous { get; set; }
         public Node<T> Next { get; set; }
     }
 }
